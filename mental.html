@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Mental Health Support</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #1f2933;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Navbar */
+    header {
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #2563eb;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: #2563eb;
+    }
+
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #2563eb;
+      border: 1px solid #2563eb;
+    }
+
+    .btn-outline:hover {
+      background: #e0edff;
+    }
+
+    .btn-active {
+      background: #2563eb !important;
+      color: #ffffff !important;
+      border-color: #2563eb !important;
+    }
+
+    /* Page Container */
+    .page-container {
+      min-height: 100vh;
+    }
+
+    /* Home Page */
+    #home-page {
+      display: block;
+    }
+
+    /* Login Page */
+    #login-page {
+      display: none;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.2rem;
+    }
+
+    /* Support Page */
+    #support-page {
+      display: none;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.2rem;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.6fr);
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: #e0edff;
+      color: #2563eb;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero h1 {
+      font-size: 2.3rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero p {
+      font-size: 0.98rem;
+      color: #4b5563;
+      margin-bottom: 1.3rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-meta {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .hero-card {
+      background: linear-gradient(145deg, #e0f2fe, #f5f3ff);
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+    }
+
+    .hero-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-card p {
+      font-size: 0.9rem;
+      color: #4b5563;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-card ul {
+      list-style: none;
+      font-size: 0.85rem;
+      color: #374151;
+    }
+
+    .hero-card li {
+      margin-bottom: 0.3rem;
+    }
+
+    /* Sections */
+    section {
+      max-width: 1100px;
+      margin: 0 auto 3rem;
+      padding: 0 1.2rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      color: #6b7280;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Features */
+    .grid {
+      display: grid;
+      gap: 1.4rem;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 1.2rem;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e5e7eb;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      color: #4b5563;
+      margin-bottom: 0.6rem;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #2563eb;
+      margin-right: 0.3rem;
+      margin-bottom: 0.3rem;
+    }
+
+    /* Roles */
+    .role-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #2563eb;
+      margin-bottom: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    ul.feature-list {
+      list-style: disc;
+      padding-left: 1.1rem;
+      font-size: 0.88rem;
+      color: #374151;
+    }
+
+    ul.feature-list li {
+      margin-bottom: 0.3rem;
+    }
+
+    /* Login & Support Page Styles */
+    .auth-form, .support-form {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 2.5rem;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+      border: 1px solid #e5e7eb;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: #1f2933;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .support-options {
+      display: grid;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .support-option {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .support-option:hover {
+      border-color: #2563eb;
+      background: #eff6ff;
+    }
+
+    .role-tabs {
+      display: flex;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    .role-tab {
+      padding: 0.75rem 1.5rem;
+      background: none;
+      border: none;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .role-tab.active {
+      color: #2563eb;
+      border-bottom: 3px solid #2563eb;
+      font-weight: 600;
+    }
+
+    .form-toggle {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-toggle .btn {
+      flex: 1;
+    }
+
+    .success-message {
+      color: #10b981;
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 1rem;
+      background: #ecfdf5;
+      border-radius: 0.5rem;
+      border: 1px solid #bbf7d0;
+      display: none;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #e5e7eb;
+      padding: 1.5rem 1.2rem 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6b7280;
+      background: #ffffff;
+      margin-top: 3rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .form-toggle {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <div class="nav">
+      <div class="logo">CampusCare</div>
+      <div class="nav-links">
+        <a href="#" onclick="showPage('home')">Features</a>
+        <a href="#" onclick="showPage('home')">Admin & Student</a>
+        <a href="#" onclick="showPage('home')">Support</a>
+        <button class="btn btn-outline" id="login-btn">Login</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE CONTAINER -->
+  <div class="page-container">
+    <!-- HOME PAGE -->
+    <main id="home-page">
+      <section class="hero">
+        <div>
+          <span class="hero-tag">FEDF‑PS49 · For Students</span>
+          <h1>Feel heard, supported and safe on campus.</h1>
+          <p>
+            CampusCare connects students with mental health resources, virtual counseling, and peer
+            support groups in one confidential platform.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="get-support-btn">Get support now</button>
+            <button class="btn btn-outline">Book a session</button>
+          </div>
+          <p class="hero-meta">
+            24×7 access · Private & secure · Free for all students
+          </p>
+        </div>
+
+        <aside class="hero-card">
+          <h3>Next available therapy slots</h3>
+          <p>Book a confidential virtual session with a campus counselor.</p>
+          <ul>
+            <li>Today · 6:30 PM – Stress & anxiety</li>
+            <li>Tomorrow · 4:15 PM – Academic pressure</li>
+            <li>Friday · 5:00 PM – Group support circle</li>
+          </ul>
+        </aside>
+      </section>
+
+      <!-- FEATURES -->
+      <section id="features">
+        <h2 class="section-title">What you can do</h2>
+        <p class="section-subtitle">
+          Simple tools to help students learn, talk and heal at their own pace.
+        </p>
+
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Virtual therapy sessions</h3>
+            <p>Schedule one‑to‑one video calls with licensed counselors or campus psychologists.</p>
+            <span class="pill">Secure video</span>
+            <span class="pill">Calendar reminders</span>
+          </div>
+
+          <div class="card">
+            <h3>Self‑help resource library</h3>
+            <p>Browse articles, checklists, and exercises on stress, sleep, exams, relationships and more.</p>
+            <span class="pill">Guided exercises</span>
+            <span class="pill">Downloadable PDFs</span>
+          </div>
+
+          <div class="card">
+            <h3>Peer support groups</h3>
+            <p>Join moderated groups with fellow students who understand what you are going through.</p>
+            <span class="pill">Topic‑based rooms</span>
+            <span class="pill">Anonymous option</span>
+          </div>
+
+          <div class="card">
+            <h3>Crisis & emergency help</h3>
+            <p>Instant access to helplines and on‑campus emergency contacts when you need urgent support.</p>
+            <span class="pill">One‑tap call</span>
+          </div>
+
+          <div class="card">
+            <h3>Mood check‑ins</h3>
+            <p>Log how you feel each day and track patterns across the semester.</p>
+            <span class="pill">Weekly reports</span>
+          </div>
+
+          <div class="card">
+            <h3>Privacy first</h3>
+            <p>Your data is encrypted and only visible to authorized mental health professionals.</p>
+            <span class="pill">Secure</span>
+            <span class="pill">Confidential</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ROLES -->
+      <section id="roles">
+        <h2 class="section-title">Designed for both roles</h2>
+        <p class="section-subtitle">
+          Different dashboards for admins and students to keep everything organized.
+        </p>
+
+        <div class="grid grid-3">
+          <div class="card">
+            <p class="role-label">Admin</p>
+            <h3>Counseling management</h3>
+            <ul class="feature-list">
+              <li>Create and update mental health resources.</li>
+              <li>Manage counselor profiles and availability.</li>
+              <li>Open and moderate support groups.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="role-label">Admin</p>
+            <h3>Session oversight</h3>
+            <ul class="feature-list">
+              <li>Approve or reschedule session requests.</li>
+              <li>View anonymized usage trends.</li>
+              <li>Send campus‑wide announcements.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="role-label">Student</p>
+            <h3>Student experience</h3>
+            <ul class="feature-list">
+              <li>Access the resource library any time.</li>
+              <li>Book or cancel therapy sessions online.</li>
+              <li>Join or leave support groups safely.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUPPORT SECTION -->
+      <section id="support">
+        <h2 class="section-title">Need urgent help?</h2>
+        <p class="section-subtitle">
+          If you or someone you know is in crisis, please contact your local emergency services immediately.
+        </p>
+
+        <div class="card">
+          <p style="font-size:0.9rem; margin-bottom:0.6rem;">
+            On‑campus helpline (24×7): <strong>+91‑0000‑000‑000</strong>
+          </p>
+          <p style="font-size:0.85rem; color:#4b5563;">
+            This platform is for mental health support and does not replace professional medical care.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- LOGIN & REGISTRATION PAGE -->
+    <main id="login-page">
+      <div class="auth-form">
+        <h2 style="margin-bottom: 1rem; color: #1f2933;">Welcome</h2>
+        <p style="color: #4b5563; margin-bottom: 2rem;">Please register or sign in to access your dashboard</p>
+        
+        <div class="role-tabs">
+          <button class="role-tab active" onclick="switchRole('student')">Student</button>
+          <button class="role-tab" onclick="switchRole('admin')">Admin</button>
+        </div>
+
+        <div class="form-toggle">
+          <button class="btn btn-outline btn-active" id="login-toggle-btn" onclick="toggleForm('login')">Login</button>
+          <button class="btn btn-outline" id="register-toggle-btn" onclick="toggleForm('register')">Register</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="login-form">
+          <div class="form-group">
+            <label>Email or Student ID</label>
+            <input type="text" id="login-email" placeholder="student@kluniversity.edu.in" required>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="login-password" placeholder="Enter your password" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">
+            Sign In
+          </button>
+        </form>
+
+        <!-- REGISTRATION FORM -->
+        <form id="register-form" style="display:none;">
+          <div class="form-group">
+            <label>Email or Student ID</label>
+            <input type="text" id="reg-email" placeholder="student@kluniversity.edu.in" required>
+          </div>
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="reg-name" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="reg-password" placeholder="Create a password" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-bottom:1rem;">
+            Register & Sign In
+          </button>
+        </form>
+
+        <div id="success-message" class="success-message">
+          User successfully registered! You can now proceed with full access to CampusCare.
+        </div>
+
+        <div style="text-align: center;">
+          <a href="#" style="font-size: 0.85rem; color: #6b7280;">Forgot password?</a>
+        </div>
+
+        <div style="text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb;">
+          <button type="button" class="btn btn-outline" onclick="showPage('home')" style="width: 100%;">
+            Back to Home
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- SUPPORT PAGE -->
+    <main id="support-page">
+      <div class="support-form">
+        <h2 style="margin-bottom: 1rem; color: #1f2933;">Get Support Now</h2>
+        <p style="color: #4b5563; margin-bottom: 2rem;">Tell us how we can help you today.</p>
+        
+        <form>
+          <div class="form-group">
+            <label>What best describes your situation?</label>
+            <select>
+              <option>Feeling stressed or anxious</option>
+              <option>Academic pressure</option>
+              <option>Relationship issues</option>
+              <option>Sleep problems</option>
+              <option>Need to talk to someone</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Tell us more (optional)</label>
+            <textarea rows="4" placeholder="Share what you're comfortable sharing..."></textarea>
+          </div>
+
+          <div class="support-options">
+            <div class="support-option">
+              <h4>📞 Call Helpline Now</h4>
+              <p>+91-0000-000-000 (24×7)</p>
+            </div>
+            <div class="support-option">
+              <h4>💬 Chat with Counselor</h4>
+              <p>Connect instantly with available support</p>
+            </div>
+            <div class="support-option">
+              <h4>📅 Book Session</h4>
+              <p>Schedule virtual therapy</p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; justify-content: space-between;">
+            <button type="button" class="btn btn-outline" onclick="showPage('home')">Back to Home</button>
+            <button type="submit" class="btn btn-primary">Send Request</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 CampusCare · Student Mental Health Support Platform
+  </footer>
+
+  <script>
+    let currentRole = 'student';
+    let currentForm = 'login';
+
+    function showPage(pageName) {
+      const homePage = document.getElementById('home-page');
+      const loginPage = document.getElementById('login-page');
+      const supportPage = document.getElementById('support-page');
+      
+      homePage.style.display = 'none';
+      loginPage.style.display = 'none';
+      supportPage.style.display = 'none';
+      
+      if (pageName === 'home') {
+        homePage.style.display = 'block';
+      } else if (pageName === 'login') {
+        loginPage.style.display = 'block';
+      } else if (pageName === 'support') {
+        supportPage.style.display = 'block';
+      }
+      hideSuccessMessage();
+    }
+
+    function switchRole(role) {
+      currentRole = role;
+      document.querySelectorAll('.role-tab').forEach(tab => tab.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    function toggleForm(type) {
+      currentForm = type;
+      const loginForm = document.getElementById('login-form');
+      const registerForm = document.getElementById('register-form');
+      const loginBtn = document.getElementById('login-toggle-btn');
+      const registerBtn = document.getElementById('register-toggle-btn');
+      
+      if (type === 'login') {
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'none';
+        loginBtn.classList.add('btn-active');
+        loginBtn.classList.remove('btn-primary');
+        registerBtn.classList.remove('btn-active');
+      } else {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+        registerBtn.classList.add('btn-active');
+        loginBtn.classList.remove('btn-active');
+      }
+      hideSuccessMessage();
+    }
+
+    function showSuccessMessage(message) {
+      const successMsg = document.getElementById('success-message');
+      successMsg.textContent = message;
+      successMsg.style.display = 'block';
+    }
+
+    function hideSuccessMessage() {
+      document.getElementById('success-message').style.display = 'none';
+    }
+
+    // Login button click
+    document.getElementById('login-btn').addEventListener('click', function() {
+      showPage('login');
+    });
+
+    // Get support button click
+    document.getElementById('get-support-btn').addEventListener('click', function() {
+      showPage('support');
+    });
+
+    // Login form submit
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      showSuccessMessage(`Welcome back, ${currentRole}! Login successful. Redirecting to your dashboard...`);
+      setTimeout(() => {
+        showPage('home');
+      }, 2500);
+    });
+
+    // Register form submit
+    document.getElementById('register-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('reg-name').value;
+      const email = document.getElementById('reg-email').value;
+      showSuccessMessage(`Hello ${name}! User successfully registered as ${currentRole}. You can now proceed with full access to CampusCare services.`);
+      setTimeout(() => {
+        showPage('home');
+      }, 3500);
+    });
+  </script>
+</body>
+</html>
